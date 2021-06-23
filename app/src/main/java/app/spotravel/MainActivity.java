@@ -11,6 +11,8 @@ import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
 
+import app.spotravel.activities.UserActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1337;
@@ -36,12 +38,11 @@ public class MainActivity extends AppCompatActivity {
             switch (response.getType()) {
                 // Response was successful and contains auth token
                 case TOKEN:
-                    Log.d("Logado?", "Sim meu bom");
+                    loggedIn(response.getAccessToken());
                     break;
 
                 // Auth flow returned an error
                 case ERROR:
-                    Log.d("Logado?", "Não :(");
                     // Handle error response
                     break;
 
@@ -50,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
                     // Handle other cases
             }
         }
+    }
+
+    private void loggedIn(String token){
+        Intent intent = new Intent(MainActivity.this, UserActivity.class);
+        intent.putExtra("token", token);
+        startActivity(intent);
     }
 
     public void login(View view) {
