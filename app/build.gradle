@@ -20,11 +20,13 @@ android {
 
     buildTypes {
         debug {
+            resValue("string", "spotify_client_id", localProperties['spotify.client.id'])
             debuggable true
             signingConfig signingConfigs.debug
         }
         release {
             minifyEnabled false
+            resValue("string", "spotify_client_id", localProperties['spotify.client.id'])
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
