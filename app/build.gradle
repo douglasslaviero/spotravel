@@ -3,6 +3,9 @@ plugins {
 }
 
 android {
+    def localProperties = new Properties()
+    localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
     compileSdkVersion 30
 
     defaultConfig {
@@ -28,10 +31,10 @@ android {
 
     signingConfigs {
         debug {
-            storePassword '{here goes your key store password}'
-            storeFile file('{here goes your keystore path}/.android/debug.keystore')
-            keyPassword '{here goes your key store password}'
-            keyAlias '{here goes your key store alias}'
+            storePassword localProperties['keystore.password']
+            storeFile file(localProperties['keystore.path'] + '.android/debug.keystore')
+            keyPassword localProperties['keystore.password']
+            keyAlias localProperties['keystore.alias']
         }
     }
 
@@ -51,4 +54,11 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation files('../app/libs/spotify-auth-release-1.2.3.aar')
+
+    implementation 'androidx.browser:browser:1.0.0'
+    implementation "com.google.code.gson:gson:2.8.5"
+
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
