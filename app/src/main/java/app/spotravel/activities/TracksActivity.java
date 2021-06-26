@@ -1,21 +1,20 @@
 package app.spotravel.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.spotify.protocol.types.Track;
+import com.spotify.protocol.types.Album;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import app.spotravel.R;
 import app.spotravel.adapters.TracksAdapter;
 import app.spotravel.api.ApiInterface;
 import app.spotravel.api.ApiClient;
+import app.spotravel.models.Track;
 import app.spotravel.models.TracksResponse;
 import retrofit2.Call;
 import retrofit2.Callback;

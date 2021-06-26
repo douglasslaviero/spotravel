@@ -1,7 +1,6 @@
 package app.spotravel.models;
 
 import com.google.gson.annotations.SerializedName;
-import com.spotify.protocol.types.Track;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -6,11 +6,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="5dp"
+        android:orientation="vertical">
         <TextView
             android:id="@+id/track_name"
+            android:textSize="20dp"
+            android:gravity="fill_vertical"
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/artist_names"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,6 @@
 package app.spotravel.models;
 
 import com.google.gson.annotations.SerializedName;
-import com.spotify.protocol.types.Track;
 
 public class TrackResponse {
     @SerializedName("track")
