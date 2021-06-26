@@ -4,14 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
 
-import app.spotravel.activities.UserActivity;
+import app.spotravel.activities.TracksActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loggedIn(String token){
-        Intent intent = new Intent(MainActivity.this, UserActivity.class);
+        Intent intent = new Intent(MainActivity.this, TracksActivity.class);
         intent.putExtra("token", token);
         startActivity(intent);
     }

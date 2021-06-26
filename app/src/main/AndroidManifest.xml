@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.UserActivity">
+        <activity android:name=".activities.TracksActivity">
         </activity>
     </application>
 
