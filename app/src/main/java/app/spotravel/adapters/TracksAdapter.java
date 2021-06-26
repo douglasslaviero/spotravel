@@ -60,7 +60,7 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         private void setData(Track track) {
-            tvTrackName.setText(track.name);
+            tvTrackName.setText(track.getName());
             tvArtistName.setText(track.getArtistNames());
         }
 

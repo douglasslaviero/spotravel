@@ -3,39 +3,14 @@ package app.spotravel.models;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
-
 import com.google.gson.annotations.SerializedName;
-import com.spotify.protocol.types.Artist;
-import com.spotify.protocol.types.ImageUri;
-
 import java.util.ArrayList;
-import java.util.List;
 
-public class Track extends com.spotify.protocol.types.Track {
-    public Track(
-            Artist artist,
-            List<Artist> artists,
-            Album album,
-            long duration,
-            String name,
-            String uri,
-            ImageUri imageUri,
-            boolean isEpisode,
-            boolean isPodcast) {
-        super(
-                artist,
-                artists,
-                album,
-                duration,
-                name,
-                uri,
-                imageUri,
-                isEpisode,
-                isPodcast);
-    }
-
+public class Track extends  Spotify {
     @SerializedName("album")
     private Album album;
+    @SerializedName("artists")
+    private ArrayList<Artist> artists;
 
     public Album getAlbum()
     { return album; }
@@ -43,12 +18,18 @@ public class Track extends com.spotify.protocol.types.Track {
     public void setAlbum(Album album)
     { this.album = album; }
 
+    public ArrayList<Artist> getArtists()
+    { return artists; }
+
+    public void setArtists(ArrayList<Artist> artists)
+    { this.artists = artists; }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public String getArtistNames(){
         ArrayList<String> artistNames = new ArrayList<>();
 
         for (Artist artist: this.artists) {
-            artistNames.add(artist.name);
+            artistNames.add(artist.getName());
         }
 
         return String.join(", ", artistNames);

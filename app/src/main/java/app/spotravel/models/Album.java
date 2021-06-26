@@ -1,15 +1,10 @@
 package app.spotravel.models;
 
 import com.google.gson.annotations.SerializedName;
-import com.spotify.protocol.types.Image;
 
 import java.util.ArrayList;
 
-public class Album extends com.spotify.protocol.types.Album {
-    public Album(String name, String uri) {
-        super(name, uri);
-    }
-
+public class Album extends Spotify {
     @SerializedName("images")
     private ArrayList<Image> images;
 
