@@ -1,9 +1,16 @@
 package app.spotravel.models;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.StrictMode;
 
 import androidx.annotation.RequiresApi;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class Track extends  Spotify {
@@ -33,5 +40,22 @@ public class Track extends  Spotify {
         }
 
         return String.join(", ", artistNames);
+    }
+
+    public Bitmap getImage(){
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        String imageURL = this.getAlbum().getImages().get(2).getUrl();
+        Bitmap image = null;
+
+        try{
+            InputStream in = new URL(imageURL).openStream();
+            image = BitmapFactory.decodeStream(in);
+        } catch (Exception e){
+            //mostrar erro ao carregar imagem;
+        }
+
+        return image;
     }
 }

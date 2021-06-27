@@ -50,18 +50,21 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
 
         private TextView tvTrackName;
         private TextView tvArtistName;
+        private ImageView ivTrackImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             tvTrackName = itemView.findViewById(R.id.track_name);
             tvArtistName = itemView.findViewById(R.id.artist_names);
+            ivTrackImage = itemView.findViewById(R.id.track_image);
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
         private void setData(Track track) {
             tvTrackName.setText(track.getName());
             tvArtistName.setText(track.getArtistNames());
+            ivTrackImage.setImageBitmap(track.getImage());
         }
 
         public void onClick(View view) {}
