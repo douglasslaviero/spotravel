@@ -4,8 +4,6 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -14,14 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import app.spotravel.R;
 import app.spotravel.models.Track;
 
-public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder> {
+public class TracksAdapter extends RecyclerView.Adapter<ViewHolder> {
     private List<Track> tracks = new ArrayList<>();
+    private OnContactListener onContactListener;
 
-    public TracksAdapter(List<Track> tracks) {
+    public TracksAdapter(List<Track> tracks, OnContactListener onContactListener) {
         this.tracks = tracks;
+        this.onContactListener = onContactListener;
     }
 
     @NonNull
@@ -30,7 +29,7 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
         View view = LayoutInflater
                 .from(viewGroup.getContext())
                 .inflate(app.spotravel.R.layout.track_layout,viewGroup,false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, this.onContactListener);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -43,30 +42,5 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return tracks.size();
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder implements
-            View.OnClickListener {
-
-        private TextView tvTrackName;
-        private TextView tvArtistName;
-        private ImageView ivTrackImage;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            itemView.setOnClickListener(this);
-            tvTrackName = itemView.findViewById(R.id.track_name);
-            tvArtistName = itemView.findViewById(R.id.artist_names);
-            ivTrackImage = itemView.findViewById(R.id.track_image);
-        }
-
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        private void setData(Track track) {
-            tvTrackName.setText(track.getName());
-            tvArtistName.setText(track.getArtistNames());
-            ivTrackImage.setImageBitmap(track.getImage());
-        }
-
-        public void onClick(View view) {}
     }
 }

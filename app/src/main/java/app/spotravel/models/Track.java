@@ -13,11 +13,19 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 
+import app.spotravel.api.ApiClient;
+import app.spotravel.api.ApiInterface;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Track extends  Spotify {
     @SerializedName("album")
     private Album album;
     @SerializedName("artists")
     private ArrayList<Artist> artists;
+
+    private AudioFeatures audioFeatures;
 
     public Album getAlbum()
     { return album; }
@@ -30,6 +38,12 @@ public class Track extends  Spotify {
 
     public void setArtists(ArrayList<Artist> artists)
     { this.artists = artists; }
+
+    public AudioFeatures getAudioFeatures()
+    { return audioFeatures; }
+
+    public void setAudioFeatures(AudioFeatures audioFeatures)
+    { this.audioFeatures = audioFeatures; }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public String getArtistNames(){

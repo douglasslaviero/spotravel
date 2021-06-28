@@ -21,6 +21,8 @@
 
         <activity android:name=".activities.TracksActivity">
         </activity>
+        <activity android:name=".activities.AudioFeaturesActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -1,25 +1,33 @@
 package app.spotravel.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 import app.spotravel.R;
+import app.spotravel.adapters.OnContactListener;
 import app.spotravel.adapters.TracksAdapter;
-import app.spotravel.api.ApiInterface;
 import app.spotravel.api.ApiClient;
+import app.spotravel.api.ApiInterface;
+import app.spotravel.models.AudioFeatures;
 import app.spotravel.models.Track;
 import app.spotravel.models.TracksResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-public class TracksActivity extends AppCompatActivity  {
+public class TracksActivity extends AppCompatActivity implements OnContactListener {
     private String token;
+    private ArrayList<Track> tracks = new ArrayList<>();
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +59,8 @@ public class TracksActivity extends AppCompatActivity  {
         call.enqueue(new Callback<TracksResponse>() {
             @Override
             public void onResponse(Call<TracksResponse> call, Response<TracksResponse> response) {
-                List<Track>  tracks = response.body().getTracks();
-                recyclerView.setAdapter(new TracksAdapter(tracks));
+                tracks = response.body().getTracks();
+                recyclerView.setAdapter(new TracksAdapter(tracks, TracksActivity.this));
             }
 
             @Override
@@ -60,5 +68,16 @@ public class TracksActivity extends AppCompatActivity  {
                 String teste = "oi";
             }
         });
+    }
+
+    @Override
+    public void onContactClick(int position)
+    {
+        Intent intent = new Intent(TracksActivity.this, AudioFeaturesActivity.class);
+
+        intent.putExtra("trackId", tracks.get(position).getId());
+        intent.putExtra("token", token);
+
+        startActivity(intent);
     }
 }
