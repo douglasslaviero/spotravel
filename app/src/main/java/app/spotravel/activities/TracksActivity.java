@@ -37,6 +37,11 @@ public class TracksActivity extends AppCompatActivity implements OnContactListen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_pied_piper);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         token = getIntent().getExtras().getString("token");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tracks_activity);
@@ -117,13 +122,11 @@ public class TracksActivity extends AppCompatActivity implements OnContactListen
         public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder,
                                 float dX, float dY, int actionState, boolean isCurrentlyActive) {
             super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-            int iconResource = 0;
+            int iconResource = R.drawable.ic_icons8_genius;;
             int left = 0, top = 0, right = 0, bottom = 0;
 
             if (dX > 0) {
                 c.clipRect(dX, viewHolder.itemView.getTop(), 0f, viewHolder.itemView.getBottom());
-                c.drawColor(Color.GREEN);
-                iconResource = R.drawable.ic_icons8_genius;
                 top =viewHolder.itemView.getTop()+50;
                 right = 200;
                 bottom = viewHolder.itemView.getBottom()-50;
@@ -131,14 +134,13 @@ public class TracksActivity extends AppCompatActivity implements OnContactListen
             } else {
                 c.clipRect(viewHolder.itemView.getRight() + dX, viewHolder.itemView.getTop(),
                         viewHolder.itemView.getRight(), viewHolder.itemView.getBottom());
-                c.drawColor(Color.GREEN);
-                iconResource = R.drawable.ic_icons8_genius;
                 left = viewHolder.itemView.getRight() - 200;
                 top = viewHolder.itemView.getTop() + 50;
                 right = viewHolder.itemView.getRight();
                 bottom = viewHolder.itemView.getBottom() - 50;
             }
 
+            c.drawColor(Color.rgb(39, 251, 107));
             Drawable icon = ContextCompat.getDrawable(getBaseContext(), iconResource);
             icon.setBounds(left, top, right, bottom);
             icon.draw(c);

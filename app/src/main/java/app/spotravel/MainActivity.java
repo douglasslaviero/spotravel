@@ -23,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_pied_piper);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         CLIENT_ID = getResources().getString(R.string.spotify_client_id);
     }
 

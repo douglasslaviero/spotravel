@@ -25,6 +25,10 @@ public class AudioFeaturesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.audio_features_activity);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.ic_pied_piper);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         Intent intent = getIntent();
         String trackId = intent.getStringExtra("trackId");
         String token = intent.getStringExtra("token");
