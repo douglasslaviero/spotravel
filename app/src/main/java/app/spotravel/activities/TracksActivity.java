@@ -1,9 +1,15 @@
 package app.spotravel.activities;
 
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,6 +45,9 @@ public class TracksActivity extends AppCompatActivity implements OnContactListen
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     @Override
@@ -80,4 +89,59 @@ public class TracksActivity extends AppCompatActivity implements OnContactListen
 
         startActivity(intent);
     }
+
+    int direction = 0;
+
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder,
+                              @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition();
+            switch (direction) {
+                case ItemTouchHelper.LEFT:
+                case ItemTouchHelper.RIGHT:
+                    Intent intent = new Intent(TracksActivity.this, GeniusLyrics.class);
+                    intent.putExtra("trackId", tracks.get(position).getId());
+                    intent.putExtra("token", token);
+                    startActivity(intent);
+                    break;
+            }
+        }
+
+        @Override
+        public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder,
+                                float dX, float dY, int actionState, boolean isCurrentlyActive) {
+            super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            int iconResource = 0;
+            int left = 0, top = 0, right = 0, bottom = 0;
+
+            if (dX > 0) {
+                c.clipRect(dX, viewHolder.itemView.getTop(), 0f, viewHolder.itemView.getBottom());
+                c.drawColor(Color.GREEN);
+                iconResource = R.drawable.ic_icons8_genius;
+                top =viewHolder.itemView.getTop()+50;
+                right = 200;
+                bottom = viewHolder.itemView.getBottom()-50;
+
+            } else {
+                c.clipRect(viewHolder.itemView.getRight() + dX, viewHolder.itemView.getTop(),
+                        viewHolder.itemView.getRight(), viewHolder.itemView.getBottom());
+                c.drawColor(Color.GREEN);
+                iconResource = R.drawable.ic_icons8_genius;
+                left = viewHolder.itemView.getRight() - 200;
+                top = viewHolder.itemView.getTop() + 50;
+                right = viewHolder.itemView.getRight();
+                bottom = viewHolder.itemView.getBottom() - 50;
+            }
+
+            Drawable icon = ContextCompat.getDrawable(getBaseContext(), iconResource);
+            icon.setBounds(left, top, right, bottom);
+            icon.draw(c);
+        }
+    };
 }

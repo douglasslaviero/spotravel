@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="app.spotravel">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Spotravel">
+        <activity
+            android:name=".activities.GeniusLyrics"
+            android:label="@string/title_activity_genius_lyrics"
+            android:theme="@style/Theme.Spotravel.NoActionBar"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,11 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".activities.TracksActivity">
-        </activity>
-        <activity android:name=".activities.AudioFeaturesActivity">
-        </activity>
+        <activity android:name=".activities.TracksActivity"></activity>
+        <activity android:name=".activities.AudioFeaturesActivity"></activity>
     </application>
 
 </manifest>

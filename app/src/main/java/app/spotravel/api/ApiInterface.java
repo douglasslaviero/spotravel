@@ -1,6 +1,7 @@
 package app.spotravel.api;
 
 import app.spotravel.models.AudioFeatures;
+import app.spotravel.models.Track;
 import app.spotravel.models.TracksResponse;
 
 import retrofit2.Call;
@@ -26,6 +27,11 @@ public interface ApiInterface {
     })
     @GET("v1/audio-features/{id}")
     Call<AudioFeatures> getAudioFeature(
+            @Path("id") String id,
+            @Header("Authorization") String token);
+
+    @GET("v1/tracks/{id}")
+    Call<Track> getTrack(
             @Path("id") String id,
             @Header("Authorization") String token);
 }
