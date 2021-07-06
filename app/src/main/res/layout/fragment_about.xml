@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.AboutFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorSecondaryVariant"
+        android:orientation="vertical">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:paddingHorizontal="30dp"
+            android:paddingVertical="80dp"
+            android:text="A ideia do Pied Piper é fazer uma integração com a conta do Spotify do usuário e buscar as últimas músicas escutadas, trazendo informações sobre a música e possibilitando a busca das letras no Genius."
+            android:textAlignment="center"
+            android:textColor="@color/white"></EditText>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:paddingHorizontal="30dp"
+            android:paddingVertical="80dp"
+            android:text="Desenvolvido por: Douglas Slaviero, Leonardo Martelli e Yago Brandalise."
+            android:textAlignment="center"
+            android:textColor="@color/white"></EditText>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:paddingHorizontal="30dp"
+            android:paddingTop="140dp"
+            android:text="Versão 1.0.0 "
+            android:textAlignment="center"
+            android:textColor="@color/white"></EditText>
+    </LinearLayout>
+</FrameLayout>
