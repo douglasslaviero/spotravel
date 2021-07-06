@@ -17,6 +17,8 @@ import app.spotravel.web.WebHelper;
 import app.spotravel.web.WebViewClientImpl;
 import retrofit2.Call;
 
+import static app.spotravel.api.SpotifyHelper.getTrack;
+
 public class GeniusLyrics extends AppCompatActivity {
 
     private WebView myWebView;
