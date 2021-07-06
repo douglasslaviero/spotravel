@@ -14,16 +14,22 @@
         <activity
             android:name=".activities.GeniusLyrics"
             android:label="@string/title_activity_genius_lyrics"
-            android:theme="@style/Theme.Spotravel.NoActionBar"></activity>
-        <activity android:name=".MainActivity">
+            android:theme="@style/Theme.Spotravel.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.Spotravel.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.TracksActivity"></activity>
-        <activity android:name=".activities.AudioFeaturesActivity"></activity>
+        <activity
+            android:name=".activities.AudioFeaturesActivity"
+            android:theme="@style/Theme.Spotravel.NoActionBar" />
+        <activity
+            android:name=".activities.AppActivity"
+            android:theme="@style/Theme.Spotravel.NoActionBar" />
     </application>
 
 </manifest>

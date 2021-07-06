@@ -1,14 +1,17 @@
-package app.spotravel.activities;
+package app.spotravel.fragments;
 
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,49 +20,48 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
+import app.spotravel.MainActivity;
 import app.spotravel.R;
+import app.spotravel.activities.AudioFeaturesActivity;
+import app.spotravel.activities.GeniusLyrics;
 import app.spotravel.adapters.OnContactListener;
 import app.spotravel.adapters.TracksAdapter;
 import app.spotravel.api.ApiClient;
 import app.spotravel.api.ApiInterface;
-import app.spotravel.models.AudioFeatures;
+import app.spotravel.databinding.TracksActivityBinding;
 import app.spotravel.models.Track;
 import app.spotravel.models.TracksResponse;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class TracksActivity extends AppCompatActivity implements OnContactListener {
+public class TracksFragment extends Fragment implements OnContactListener {
+    private TracksActivityBinding binding;
     private String token;
     private ArrayList<Track> tracks = new ArrayList<>();
     private Gson gson = new Gson();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        binding = TracksActivityBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
 
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.ic_pied_piper);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-
-        token = getIntent().getExtras().getString("token");
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.tracks_activity);
-
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView recyclerView = binding.recyclerview;
+        LinearLayoutManager layoutManager = new LinearLayoutManager(inflater.getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+
+        return root;
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
 
-        setTracksOnView(findViewById(R.id.recyclerview));
+        setTracksOnView(binding.recyclerview);
     }
 
     private void setTracksOnView(RecyclerView recyclerView) {
@@ -68,13 +70,15 @@ public class TracksActivity extends AppCompatActivity implements OnContactListen
 
         int tracksQuantity = 10;
 
+        String token = MainActivity.TokenValue;
+
         Call<TracksResponse> call = apiService.getTrackHistory(tracksQuantity, "Bearer " + token);
 
         call.enqueue(new Callback<TracksResponse>() {
             @Override
             public void onResponse(Call<TracksResponse> call, Response<TracksResponse> response) {
                 tracks = response.body().getTracks();
-                recyclerView.setAdapter(new TracksAdapter(tracks, TracksActivity.this));
+                recyclerView.setAdapter(new TracksAdapter(tracks, TracksFragment.this));
             }
 
             @Override
@@ -87,10 +91,10 @@ public class TracksActivity extends AppCompatActivity implements OnContactListen
     @Override
     public void onContactClick(int position)
     {
-        Intent intent = new Intent(TracksActivity.this, AudioFeaturesActivity.class);
+        Intent intent = new Intent(this.getActivity(), AudioFeaturesActivity.class);
 
         intent.putExtra("trackId", tracks.get(position).getId());
-        intent.putExtra("token", token);
+        intent.putExtra("token", MainActivity.TokenValue);
 
         startActivity(intent);
     }
@@ -110,9 +114,9 @@ public class TracksActivity extends AppCompatActivity implements OnContactListen
             switch (direction) {
                 case ItemTouchHelper.LEFT:
                 case ItemTouchHelper.RIGHT:
-                    Intent intent = new Intent(TracksActivity.this, GeniusLyrics.class);
+                    Intent intent = new Intent(TracksFragment.this.getActivity(), GeniusLyrics.class);
                     intent.putExtra("trackId", tracks.get(position).getId());
-                    intent.putExtra("token", token);
+                    intent.putExtra("token", MainActivity.TokenValue);
                     startActivity(intent);
                     break;
             }
@@ -141,9 +145,15 @@ public class TracksActivity extends AppCompatActivity implements OnContactListen
             }
 
             c.drawColor(Color.rgb(39, 251, 107));
-            Drawable icon = ContextCompat.getDrawable(getBaseContext(), iconResource);
+            Drawable icon = ContextCompat.getDrawable(getContext(), iconResource);
             icon.setBounds(left, top, right, bottom);
             icon.draw(c);
         }
     };
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
 }
