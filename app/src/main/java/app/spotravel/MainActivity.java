@@ -10,22 +10,19 @@ import com.spotify.sdk.android.auth.AuthorizationClient;
 import com.spotify.sdk.android.auth.AuthorizationRequest;
 import com.spotify.sdk.android.auth.AuthorizationResponse;
 
-import app.spotravel.activities.TracksActivity;
+import app.spotravel.activities.AppActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE = 1337;
     private static final String REDIRECT_URI = "app.spotravel://callback";
+    public static String TokenValue;
     private String CLIENT_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.ic_pied_piper);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         CLIENT_ID = getResources().getString(R.string.spotify_client_id);
     }
@@ -41,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
             switch (response.getType()) {
                 // Response was successful and contains auth token
                 case TOKEN:
-                    loggedIn(response.getAccessToken());
+                    TokenValue = response.getAccessToken();
+                    loggedIn();
                     break;
 
                 // Auth flow returned an error
@@ -56,9 +54,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void loggedIn(String token){
-        Intent intent = new Intent(MainActivity.this, TracksActivity.class);
-        intent.putExtra("token", token);
+    private void loggedIn(){
+        Intent intent = new Intent(MainActivity.this, AppActivity.class);
         startActivity(intent);
     }
 
