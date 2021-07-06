@@ -26,6 +26,7 @@ public class WebHelper {
 
     private static String getTreatedString(String _string) {
         String treated = Normalizer.normalize(_string, Normalizer.Form.NFD)
+                .replace('-', ' ')
                 .replaceAll("[^\\p{ASCII}]", "")
                 .replaceAll("[^a-zA-Z0-9\\s]", "")
                 .replace(' ', '-');

@@ -56,17 +56,4 @@ public class GeniusLyrics extends AppCompatActivity {
         }
         return super.onKeyDown(keyCode, event);
     }
-
-    private Track getTrack(String trackId, String token) {
-        ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
-
-        Call<Track> call = apiService.getTrack(trackId, "Bearer " + token);
-
-        try {
-            return call.execute().body();
-        } catch (Exception e) {
-            return null;
-        }
-    }
 }
