@@ -42,5 +42,4 @@ public interface ApiInterface {
     })
     @GET("v1/me")
     Call<User> getUser(@Header("Authorization") String token);
-
 }
