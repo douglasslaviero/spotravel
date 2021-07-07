@@ -1,7 +1,10 @@
 package app.spotravel.activities;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -9,16 +12,28 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import app.spotravel.MainActivity;
 import app.spotravel.R;
+import app.spotravel.adapters.TracksAdapter;
+import app.spotravel.api.ApiClient;
+import app.spotravel.api.ApiInterface;
 import app.spotravel.databinding.AppActivityBinding;
+import app.spotravel.fragments.TracksFragment;
+import app.spotravel.models.TracksResponse;
+import app.spotravel.models.User;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AppActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private AppActivityBinding binding;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +46,6 @@ public class AppActivity extends AppCompatActivity {
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
 
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_track, R.id.nav_about)
                 .setDrawerLayout(drawer)
@@ -42,6 +54,12 @@ public class AppActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        setUser();
+
+        View headerView = navigationView.getHeaderView(0);
+        TextView tvUserName = headerView.findViewById(R.id.user_name);
+        tvUserName.setText(user.getDisplayName());
     }
 
     @Override
@@ -55,5 +73,21 @@ public class AppActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    private void setUser() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        String token = MainActivity.TokenValue;
+
+        Call<User> call = apiService.getUser("Bearer " + token);
+
+        try{
+            user = call.execute().body();
+        } catch(Exception e){
+            user = null;
+        }
     }
 }

@@ -5,9 +5,11 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -31,6 +33,7 @@ import app.spotravel.api.ApiInterface;
 import app.spotravel.databinding.TracksActivityBinding;
 import app.spotravel.models.Track;
 import app.spotravel.models.TracksResponse;
+import app.spotravel.models.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,7 +71,7 @@ public class TracksFragment extends Fragment implements OnContactListener {
         ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
-        int tracksQuantity = 10;
+        int tracksQuantity = 20;
 
         String token = MainActivity.TokenValue;
 

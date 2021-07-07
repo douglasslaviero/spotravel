@@ -4,6 +4,7 @@ import app.spotravel.models.AudioFeatures;
 import app.spotravel.models.Track;
 import app.spotravel.models.TracksResponse;
 
+import app.spotravel.models.User;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
@@ -34,4 +35,12 @@ public interface ApiInterface {
     Call<Track> getTrack(
             @Path("id") String id,
             @Header("Authorization") String token);
+
+    @Headers({
+            "Accept: application/json",
+            "Content-Type: application/json"
+    })
+    @GET("v1/me")
+    Call<User> getUser(@Header("Authorization") String token);
+
 }
