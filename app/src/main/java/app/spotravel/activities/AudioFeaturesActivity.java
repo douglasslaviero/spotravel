@@ -9,12 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 
 import app.spotravel.R;
-import app.spotravel.api.ApiClient;
-import app.spotravel.api.ApiInterface;
 import app.spotravel.models.AudioFeatures;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
+import static app.spotravel.api.SpotifyHelper.getAudioFeatures;
 
 public class AudioFeaturesActivity extends AppCompatActivity {
     private Gson gson = new Gson();
@@ -52,16 +49,7 @@ public class AudioFeaturesActivity extends AppCompatActivity {
         tvTempoValue.setText(String.valueOf(audioFeatures.getTempo()));
     }
 
-    private void setAudioFeatures(String trackId, String token){
-        ApiInterface apiService =
-                ApiClient.getClient().create(ApiInterface.class);
-
-        Call<AudioFeatures> call = apiService.getAudioFeature(trackId,  "Bearer " + token);
-
-        try{
-            audioFeatures = call.execute().body();
-        } catch (Exception e){
-            //mostrar erro
-        }
+    private void setAudioFeatures(String trackId, String token) {
+        audioFeatures = getAudioFeatures(trackId, token);
     }
 }

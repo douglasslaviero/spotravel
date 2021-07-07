@@ -7,172 +7,242 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/colorSecondaryVariant"
+        android:isScrollContainer="true"
         android:orientation="vertical"
-        android:paddingVertical="100dp">
+        android:paddingTop="@dimen/activity_vertical_margin">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:orientation="horizontal"
-            android:paddingVertical="20dp"
-            >
+            android:paddingVertical="20dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:text="Danceability"
                 android:textColor="@color/white"
-                android:text="Danceability"/>
+                android:textSize="20dp" />
+
             <TextView
                 android:id="@+id/tvDanceabilityValue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@color/white"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="20dp" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingVertical="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:paddingVertical="20dp">
+
             <TextView
-                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="Energy"/>
-            <TextView
+                android:text="Energy"
                 android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
                 android:id="@+id/tvEnergyValue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="20dp" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingVertical="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:paddingVertical="20dp">
+
             <TextView
-                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="Loudness"/>
-            <TextView
+                android:text="Loudness"
                 android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
                 android:id="@+id/tvLoudnessValue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="20dp" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingVertical="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:paddingVertical="20dp">
+
             <TextView
-                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="Speechiness"/>
-            <TextView
+                android:text="Speechiness"
                 android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
                 android:id="@+id/tvSpeechinessValue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="20dp" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingVertical="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:paddingVertical="20dp">
+
             <TextView
-                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="Acousticness"/>
-            <TextView
+                android:text="Acousticness"
                 android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
                 android:id="@+id/tvAcousticnessValue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="20dp" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingVertical="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:paddingVertical="20dp">
+
             <TextView
-                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text="Instrumentalness"/>
+                android:layout_weight="1.5"
+                android:text="Instrumentalness"
+                android:textColor="@color/white"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/tvInstrumentalnessValue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:textColor="@color/white" />
+                android:layout_weight="1.5"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="20dp" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingVertical="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:paddingVertical="20dp">
+
             <TextView
-                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="Liveness"/>
-            <TextView
+                android:text="Liveness"
                 android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
                 android:id="@+id/tvLivenessValue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="20dp" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingVertical="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:paddingVertical="20dp">
+
             <TextView
-                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="Valence"/>
-            <TextView
+                android:text="Valence"
                 android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
                 android:id="@+id/tvValenceValue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="20dp" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingVertical="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:orientation="horizontal"
+            android:paddingVertical="20dp">
+
             <TextView
-                android:textColor="@color/white"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:text="Tempo"/>
-            <TextView
+                android:text="Tempo"
                 android:textColor="@color/white"
+                android:textSize="20dp" />
+
+            <TextView
                 android:id="@+id/tvTempoValue"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:textAlignment="textEnd"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="20dp" />
         </LinearLayout>
     </LinearLayout>
 

@@ -92,8 +92,7 @@ public class TracksFragment extends Fragment implements OnContactListener {
     }
 
     @Override
-    public void onContactClick(int position)
-    {
+    public void onContactClick(int position) {
         Intent intent = new Intent(this.getActivity(), AudioFeaturesActivity.class);
 
         intent.putExtra("trackId", tracks.get(position).getId());
